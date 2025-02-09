@@ -1,0 +1,26 @@
+*{
+  margin:0;
+  padding:0;
+}
+.gochi-hand-regular {
+  font-family: "Gochi Hand", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body{
+  font-family: "Gochi Hand";
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+#text{
+  top:50%;
+  left:50%;
+}
+#text p{
+  top:-16rem;
+}
+#text #text-para{
+  top:-12rem;
+  left:-5rem;
+}
