@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView, useScroll, useTransform } from "framer-motion";
-import { Analytics } from "@vercel/analytics/next"
-
+import { Analytics } from "@vercel/analytics/react"
 /* ─── Font + Global CSS ─── */
 const FontInjector = () => {
   useEffect(() => {
