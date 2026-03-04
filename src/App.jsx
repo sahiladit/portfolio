@@ -67,6 +67,7 @@ const GlobalStyles = () => {
         .exp-grid { grid-template-columns: 1fr !important; }
         .exp-period { text-align: left !important; }
         .contact-links { flex-direction: column; align-items: center; }
+        .hero-photo { display: none !important; }
       }
 
       /* ── hover link ── */
@@ -304,8 +305,8 @@ const Nav = () => {
         <span style={{ color: "#555" }}>~/</span>sahil_adit
       </div>
 
-      {/* desktop */}
-      <ul className="nav-links">
+      {/* nav links — single list, CSS handles desktop vs mobile */}
+      <ul className={`nav-links${open ? " open" : ""}`}>
         {links.map((l, i) => (
           <motion.li key={l}
             initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
@@ -321,7 +322,7 @@ const Nav = () => {
         ))}
       </ul>
 
-      {/* hamburger */}
+      {/* hamburger — only visible on mobile via CSS */}
       <button
         className="hamburger"
         onClick={() => setOpen(o => !o)}
@@ -334,20 +335,6 @@ const Nav = () => {
           <span key={i} style={{ display: "block", width: 22, height: 2, background: "#888" }} />
         ))}
       </button>
-
-      {/* mobile menu */}
-      <ul className={`nav-links${open ? " open" : ""}`}>
-        {links.map(l => (
-          <li key={l}>
-            <a href={`#${l}`} className="nav-link"
-              style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 14, letterSpacing: "0.08em" }}
-              onClick={() => setOpen(false)}
-            >
-              {l}
-            </a>
-          </li>
-        ))}
-      </ul>
     </motion.nav>
   );
 };
@@ -390,102 +377,216 @@ const Hero = () => {
         backgroundSize: "60px 60px",
       }} />
 
-      <motion.div style={{ y, position: "relative", zIndex: 1 }}>
-        <motion.div
-          initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.1, duration: 0.5 }}
-          style={{
-            fontFamily: "'JetBrains Mono',monospace", fontSize: 12, color: "#00ff88",
-            letterSpacing: "0.15em", marginBottom: 24,
-            display: "flex", alignItems: "center", gap: 10,
-          }}
-        >
-          <span style={{ display: "inline-block", width: 32, height: 1, background: "#00ff88" }} />
-          COMPUTER ENGINEERING · PUNE
-        </motion.div>
+      {/* hero inner — two columns */}
+      <div style={{
+        display: "flex", alignItems: "center",
+        justifyContent: "space-between", gap: 40,
+        position: "relative", zIndex: 1,
+        flexWrap: "wrap",
+      }}>
 
-        <div style={{ overflow: "hidden" }}>
-          <motion.h1
-            initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        {/* ── LEFT: text ── */}
+        <motion.div style={{ y, flex: "1 1 420px", minWidth: 0 }}>
+          <motion.div
+            initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
             style={{
-              fontFamily: "'Syne',sans-serif",
-              fontSize: "clamp(3.5rem, 9vw, 7.5rem)",
-              fontWeight: 800, lineHeight: 0.95,
-              letterSpacing: "-0.02em", marginBottom: 8,
+              fontFamily: "'JetBrains Mono',monospace", fontSize: 12, color: "#00ff88",
+              letterSpacing: "0.15em", marginBottom: 24,
+              display: "flex", alignItems: "center", gap: 10,
             }}
           >
-            <span style={{ color: "#555" }}>SAHIL</span><br />
-            <span style={{ color: "#00ff88" }}>ADIT</span>
-          </motion.h1>
-        </div>
+            <span style={{ display: "inline-block", width: 32, height: 1, background: "#00ff88" }} />
+            COMPUTER ENGINEERING · PUNE
+          </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.45, duration: 0.6 }}
-          style={{
-            fontFamily: "'JetBrains Mono',monospace",
-            fontSize: "clamp(12px, 1.8vw, 15px)",
-            color: "#888", marginTop: 24, maxWidth: 500, lineHeight: 1.75,
-          }}
-        >
-          Building intelligent systems — from{" "}
-          <span style={{ color: "#0af" }}>RAG-based AI</span> to{" "}
-          <span style={{ color: "#0af" }}>graph-based fraud detection</span>.<br />
-          C++ · React · Python · IoT
-        </motion.p>
+          <div style={{ overflow: "hidden" }}>
+            <motion.h1
+              initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                fontFamily: "'Syne',sans-serif",
+                fontSize: "clamp(3.5rem, 9vw, 7.5rem)",
+                fontWeight: 800, lineHeight: 0.95,
+                letterSpacing: "-0.02em", marginBottom: 8,
+              }}
+            >
+              <span style={{ color: "#555" }}>SAHIL</span><br />
+              <span style={{ color: "#00ff88" }}>ADIT</span>
+            </motion.h1>
+          </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-          style={{ display: "flex", gap: 14, marginTop: 40, flexWrap: "wrap" }}
-        >
-          <a href="#projects" style={{
-            fontFamily: "'JetBrains Mono',monospace", fontSize: 12, letterSpacing: "0.1em",
-            padding: "12px 28px", borderRadius: 3, cursor: "pointer",
-            background: "#00ff88", color: "#000", border: "1px solid #00ff88",
-            transition: "all 0.2s", display: "inline-block",
-          }}
-            onMouseEnter={e => { e.target.style.background="transparent"; e.target.style.color="#00ff88"; }}
-            onMouseLeave={e => { e.target.style.background="#00ff88"; e.target.style.color="#000"; }}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45, duration: 0.6 }}
+            style={{
+              fontFamily: "'JetBrains Mono',monospace",
+              fontSize: "clamp(12px, 1.8vw, 15px)",
+              color: "#888", marginTop: 24, maxWidth: 500, lineHeight: 1.75,
+            }}
           >
-            VIEW PROJECTS
-          </a>
-          <a href="mailto:spadit01@gmail.com" style={{
-            fontFamily: "'JetBrains Mono',monospace", fontSize: 12, letterSpacing: "0.1em",
-            padding: "12px 28px", borderRadius: 3, cursor: "pointer",
-            background: "transparent", color: "#555", border: "1px solid #1e1e1e",
-            transition: "all 0.2s", display: "inline-block",
-          }}
-            onMouseEnter={e => { e.target.style.borderColor="#00ff88"; e.target.style.color="#00ff88"; }}
-            onMouseLeave={e => { e.target.style.borderColor="#1e1e1e"; e.target.style.color="#555"; }}
+            Building intelligent systems — from{" "}
+            <span style={{ color: "#0af" }}>RAG-based AI</span> to{" "}
+            <span style={{ color: "#0af" }}>graph-based fraud detection</span>.<br />
+            C++ · React · Python · IoT
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+            style={{ display: "flex", gap: 14, marginTop: 40, flexWrap: "wrap" }}
           >
-            GET IN TOUCH
-          </a>
+            <a href="#projects" style={{
+              fontFamily: "'JetBrains Mono',monospace", fontSize: 12, letterSpacing: "0.1em",
+              padding: "12px 28px", borderRadius: 3, cursor: "pointer",
+              background: "#00ff88", color: "#000", border: "1px solid #00ff88",
+              transition: "all 0.2s", display: "inline-block",
+            }}
+              onMouseEnter={e => { e.target.style.background="transparent"; e.target.style.color="#00ff88"; }}
+              onMouseLeave={e => { e.target.style.background="#00ff88"; e.target.style.color="#000"; }}
+            >
+              VIEW PROJECTS
+            </a>
+            <a href="mailto:spadit01@gmail.com" style={{
+              fontFamily: "'JetBrains Mono',monospace", fontSize: 12, letterSpacing: "0.1em",
+              padding: "12px 28px", borderRadius: 3, cursor: "pointer",
+              background: "transparent", color: "#555", border: "1px solid #1e1e1e",
+              transition: "all 0.2s", display: "inline-block",
+            }}
+              onMouseEnter={e => { e.target.style.borderColor="#00ff88"; e.target.style.color="#00ff88"; }}
+              onMouseLeave={e => { e.target.style.borderColor="#1e1e1e"; e.target.style.color="#555"; }}
+            >
+              GET IN TOUCH
+            </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="hero-stats"
+            style={{ display: "flex", gap: 40, marginTop: 64, flexWrap: "wrap" }}
+          >
+            {stats.map((s, i) => (
+              <motion.div key={s.label}
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.85 + i * 0.08 }}
+                style={{ display: "flex", flexDirection: "column", gap: 4 }}
+              >
+                <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 28, fontWeight: 700, color: "#e8e8e8" }}>
+                  {s.num}<span style={{ color: "#00ff88" }}>{s.suffix}</span>
+                </div>
+                <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: "#555", letterSpacing: "0.1em" }}>
+                  {s.label}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
 
+        {/* ── RIGHT: profile photo ── */}
         <motion.div
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="hero-stats"
-          style={{ display: "flex", gap: 40, marginTop: 64, flexWrap: "wrap" }}
+          initial={{ opacity: 0, scale: 0.92, x: 40 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="hero-photo"
+          style={{ flex: "0 0 auto", display: "flex", alignItems: "center", justifyContent: "center" }}
         >
-          {stats.map((s, i) => (
-            <motion.div key={s.label}
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.85 + i * 0.08 }}
-              style={{ display: "flex", flexDirection: "column", gap: 4 }}
-            >
-              <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 28, fontWeight: 700, color: "#e8e8e8" }}>
-                {s.num}<span style={{ color: "#00ff88" }}>{s.suffix}</span>
+          {/* outer glow ring */}
+          <div style={{ position: "relative" }}>
+            <div style={{
+              position: "absolute", inset: -2,
+              borderRadius: 20,
+              background: "linear-gradient(135deg, #00ff88, #0af, #00ff88)",
+              opacity: 0.5,
+              filter: "blur(12px)",
+              zIndex: 0,
+            }} />
+
+            {/* frame border */}
+            <div style={{
+              position: "relative", zIndex: 1,
+              padding: 3,
+              borderRadius: 20,
+              background: "linear-gradient(135deg, #00ff8860, #0af60)",
+            }}>
+              <div style={{
+                width: 320,
+                height: 380,
+                borderRadius: 17,
+                overflow: "hidden",
+                background: "#111",
+                border: "1px solid #1e1e1e",
+                position: "relative",
+              }}>
+                {/*
+                  ── TO ADD YOUR PHOTO ──
+                  Replace the src below with your image path.
+                  Put your photo in the /public folder, e.g. /public/sahil.jpg
+                  Then set: src="/sahil.jpg"
+                */}
+                <img
+                  src="/sahil.jpg"
+                  alt="Sahil Adit"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "top center",
+                    display: "block",
+                  }}
+                  onError={e => { e.target.style.display = "none"; }}
+                />
+
+                {/* subtle scanline overlay */}
+                <div style={{
+                  position: "absolute", inset: 0,
+                  backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px)",
+                  pointerEvents: "none", borderRadius: 17,
+                }} />
               </div>
-              <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 10, color: "#555", letterSpacing: "0.1em" }}>
-                {s.label}
+            </div>
+
+            {/* floating badge — CF rating */}
+            <motion.div
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              style={{
+                position: "absolute", bottom: -16, left: -20, zIndex: 2,
+                background: "#111", border: "1px solid #1e1e1e",
+                borderRadius: 10, padding: "8px 14px",
+                display: "flex", alignItems: "center", gap: 8,
+                boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+              }}
+            >
+              <span style={{ fontSize: 16 }}>⚡</span>
+              <div>
+                <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 13, fontWeight: 700, color: "#00ff88" }}>1255</div>
+                <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9, color: "#555" }}>CF RATING</div>
               </div>
             </motion.div>
-          ))}
+
+            {/* floating badge — CGPA */}
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              style={{
+                position: "absolute", top: -16, right: -20, zIndex: 2,
+                background: "#111", border: "1px solid #1e1e1e",
+                borderRadius: 10, padding: "8px 14px",
+                display: "flex", alignItems: "center", gap: 8,
+                boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+              }}
+            >
+              <span style={{ fontSize: 16 }}>🎓</span>
+              <div>
+                <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 13, fontWeight: 700, color: "#00ff88" }}>8.92</div>
+                <div style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 9, color: "#555" }}>CGPA</div>
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
-      </motion.div>
+
+      </div>
     </section>
   );
 };
@@ -494,9 +595,9 @@ const Hero = () => {
    SKILLS
 ══════════════════════════════════════ */
 const SKILL_DATA = {
-  "// LANGUAGES":  ["C++","Python","JavaScript","HTML","CSS","SQL"],
-  "// FRAMEWORKS & TOOLS": ["React.js","Node.js","FastAPI","RESTAPI"],
-  "// CONCEPTS":   ["Data Structures","Algorithms","OOP","DBMS","Linux","GenAI","IoT"],
+  "// LANGUAGES":  ["C++","Python","JavaScript","TypeScript","HTML","CSS","SQL"],
+  "// FRAMEWORKS & TOOLS": ["React.js","Next.js","Node.js","FastAPI","LangGraph","Docker","Redis","Celery","PostgreSQL","Firebase","OpenAI API"],
+  "// CONCEPTS":   ["Data Structures","Algorithms","OOP","DBMS","Linux","RAG / GenAI","IoT"],
 };
 
 const Skills = () => (
