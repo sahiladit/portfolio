@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView, useScroll, useTransform } from "framer-motion";
-
+import { Analytics } from "@vercel/analytics/next"
 
 /* ─── Font + Global CSS ─── */
 const FontInjector = () => {
@@ -902,6 +902,7 @@ export default function App() {
     <>
       <FontInjector />
       <GlobalStyles />
+      <Analytics/>
       <AnimatePresence mode="wait">
         {loading && <Loader key="loader" onDone={() => setLoading(false)} />}
       </AnimatePresence>
