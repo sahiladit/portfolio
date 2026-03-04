@@ -425,10 +425,8 @@ const Hero = () => {
               color: "#888", marginTop: 24, maxWidth: 500, lineHeight: 1.75,
             }}
           >
-            Building intelligent systems — from{" "}
-            <span style={{ color: "#0af" }}>RAG-based AI</span> to{" "}
-            <span style={{ color: "#0af" }}>graph-based fraud detection</span>.<br />
-            C++ · React · Python · IoT
+            I breathe to 
+            <span style={{ color: "#0af" }}> CODE</span>
           </motion.p>
 
           <motion.div
