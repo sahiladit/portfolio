@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useInView, useScroll, useTransform } from "framer-motion";
 
+
 /* ─── Font + Global CSS ─── */
 const FontInjector = () => {
   useEffect(() => {
